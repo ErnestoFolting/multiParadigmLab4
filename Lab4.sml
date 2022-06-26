@@ -82,3 +82,24 @@ fun count_some_var(str : string, pat : pattern)=
     g (fn _ => 0) ( fn x => if x = str then 1 else 0) pat;
 
 val test9c = count_some_var("check",TupleP[Wildcard,Wildcard,Variable "check",Variable "check2",Variable "check"]);
+
+(*10*)
+fun check_pat(pat: pattern)=
+    let 
+        fun getStrings(pat: pattern) = 
+        case pat of
+            Variable x => [x]
+            |TupleP tuple=> List.foldl(fn(p,acc)=> getStrings(p) @ acc) [] tuple 
+            |ConstructorP(_,p) => getStrings(p)
+            | _ => []
+        fun checkRep(lst: string list) = 
+            case lst of
+                [] => true
+                |hd::tl => if (List.exists(fn el => el = hd) tl)
+                        then false
+                        else checkRep(tl)
+        in 
+            checkRep(getStrings(pat))
+        end;
+
+val test10 = check_pat(TupleP [Wildcard,Wildcard])
