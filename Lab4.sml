@@ -46,3 +46,18 @@ case lst of
         |SOME x => x
 
 val test7 = first_answer (fn el => if Char.isUpper(String.sub(el,0))then SOME el else NONE)["Check123","Check124","check3"]
+
+(*8*)
+fun all_answers f lst=
+    let fun internal(acc,lst) = 
+        case lst of 
+            hd::tl => 
+                (case f(hd) of   
+                    SOME x => internal (acc @ x, tl) 
+                    |NONE => NONE)
+            |[] => SOME(acc)
+    in 
+    internal([],lst) 
+    end; 
+
+val test8 = all_answers(fn el => if Char.isUpper(String.sub(el,0))then SOME [el] else NONE)["Check123","Check124","Check3"]
