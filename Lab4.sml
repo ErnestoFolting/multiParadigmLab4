@@ -25,3 +25,8 @@ val longest_string4 = longest_string_helper(fn(str1,str2)=>if(str1>=str2) then t
 
 val test4a = (longest_string3(["check123","check124","check3"]));
 val test4b = (longest_string4(["check123","check124","check3"]));
+
+(*5*)
+val longest_capitalized = longest_string1 o only_capitals;
+
+val test5 =  longest_capitalized(["Check123","Check124","check3"]);
