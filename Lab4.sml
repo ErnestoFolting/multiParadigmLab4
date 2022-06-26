@@ -60,4 +60,25 @@ fun all_answers f lst=
     internal([],lst) 
     end; 
 
-val test8 = all_answers(fn el => if Char.isUpper(String.sub(el,0))then SOME [el] else NONE)["Check123","Check124","Check3"]
+val test8 = all_answers(fn el => if Char.isUpper(String.sub(el,0))then SOME [el] else NONE)["Check123","Check124","Check3"];
+
+(*9*)
+use "hw03.sml";
+
+(*9a*)
+fun count_wildcards(pat:pattern)= 
+    g (fn _ => 1) (fn _ => 0) pat;
+
+val test9a = count_wildcards(TupleP[Wildcard,Wildcard]);
+
+(*9b*)
+fun count_wild_and_variable_lengths(pat:pattern)=
+    g (fn _ => 1) (fn x => String.size x) pat;
+
+val test9b = count_wild_and_variable_lengths(TupleP[Wildcard,Wildcard,Variable "check"]);
+
+(*9c*)
+fun count_some_var(str : string, pat : pattern)=
+    g (fn _ => 0) ( fn x => if x = str then 1 else 0) pat;
+
+val test9c = count_some_var("check",TupleP[Wildcard,Wildcard,Variable "check",Variable "check2",Variable "check"]);
