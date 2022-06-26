@@ -30,3 +30,8 @@ val test4b = (longest_string4(["check123","check124","check3"]));
 val longest_capitalized = longest_string1 o only_capitals;
 
 val test5 =  longest_capitalized(["Check123","Check124","check3"]);
+
+(*6*)
+val rev_string = String.implode o rev o String.explode;
+
+val test6 = rev_string("check1")
