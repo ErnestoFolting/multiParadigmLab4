@@ -9,3 +9,9 @@ fun longest_string1(lst: string list) =
 List.foldl(fn(str1,str2)=>if(String.size(str1)> String.size(str2))then str1 else str2) "" lst;
 
 val test2 = longest_string1(["check123","check124","check3"])
+
+(*3*)
+fun longest_string2(lst: string list) = 
+List.foldl(fn(str1,str2)=>if(String.size(str1)>= String.size(str2))then str1 else str2) "" lst;
+
+val test3 = longest_string2(["check123","check124","check3"])
