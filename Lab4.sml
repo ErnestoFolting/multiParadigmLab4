@@ -35,3 +35,14 @@ val test5 =  longest_capitalized(["Check123","Check124","check3"]);
 val rev_string = String.implode o rev o String.explode;
 
 val test6 = rev_string("check1")
+
+(*7*)
+exception NoAnswer;
+fun first_answer f lst = 
+case lst of
+    [] => raise NoAnswer
+    |hd::tl => case f(hd) of
+        NONE => first_answer f tl 
+        |SOME x => x
+
+val test7 = first_answer (fn el => if Char.isUpper(String.sub(el,0))then SOME el else NONE)["Check123","Check124","check3"]
